@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
 const activitySchema = new Schema({
     title: {
         type: String,
@@ -19,11 +18,9 @@ const activitySchema = new Schema({
         required: true,
     },
     events: {
-        type: mongoose.Schema.Types.ObjectId, 
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Events'
     },
 });
-
 const Activity = mongoose.model('Activity', activitySchema);
-
 module.exports = Activity;
