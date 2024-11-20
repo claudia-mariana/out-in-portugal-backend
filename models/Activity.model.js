@@ -22,10 +22,6 @@ const activitySchema = new Schema({
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Events'
     },
-    user:{
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Users'
-    }
 });
 
 const Activity = mongoose.model('Activity', activitySchema);
