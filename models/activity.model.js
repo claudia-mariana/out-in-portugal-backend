@@ -40,4 +40,4 @@ const activitySchema = new Schema({
 });
 
 
-module.exports = mongoose.model('Activity', activitySchema);
+module.exports = Activity;
