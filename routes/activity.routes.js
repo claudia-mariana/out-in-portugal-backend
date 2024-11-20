@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 const Activity = require('../models/Activity.model')
@@ -47,26 +47,26 @@ router.get("/activities/:id", (req, res, next) => {
 
 
 // PUT /api/activities/:activityId - Updates a specific activity by id
-router.put("/activities/:id", isAuthenticated, (req, res, next) => {
-    Activity.findByIdAndUpdate(req.params.id, req.body, { new: true })
-        .then(updatedActivity => {
-            res.status(200).json(updatedActivity);
-        })
-        .catch(error => {
-            next(error)
-        });
-});
+// router.put("/activities/:id", isAuthenticated, (req, res, next) => {
+//     Activity.findByIdAndUpdate(req.params.id, req.body, { new: true })
+//         .then(updatedActivity => {
+//             res.status(200).json(updatedActivity);
+//         })
+//         .catch(error => {
+//             next(error)
+//         });
+// });
 
 
 // DELETE /api/activities/:activityId - Deletes a specific activity by id
-router.delete("/activities/:id", isAuthenticated, (req, res, next) => {
-    Activity.findByIdAndDelete(req.params.id)
-        .then(() => {
-            res.status(204).send();
-        })
-        .catch(error => {
-            next(error)
-        });
-});
+// router.delete("/activities/:id", isAuthenticated, (req, res, next) => {
+//     Activity.findByIdAndDelete(req.params.id)
+//         .then(() => {
+//             res.status(204).send();
+//         })
+//         .catch(error => {
+//             next(error)
+//         });
+// });
 
 module.exports = router;

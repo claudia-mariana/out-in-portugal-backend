@@ -7,17 +7,29 @@ const eventSchema = new Schema({
       required: true,
     },
     activity: {
-      type: mongoose.schema.Types.objectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Activity",
       required: true,
     },
     startDate: {
         type: Date,
         default: Date.now,
+        required: true,
       },
     endDate: Date,
-    Organization: {
+    organization: {
         type: String,
+    },
+    targetAudience: {
+      type: String,
+      enum: ['Children', 'Adults', 'Seniors', 'Everyone']
+    },
+    duration: {
+      type: Number,
+      min: 0
+    },
+    equipment: {
+      type: String,
     },
     price: Number,
   });

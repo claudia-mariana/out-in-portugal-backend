@@ -18,25 +18,10 @@ const activitySchema = new Schema({
         type: String,
         required: true,
     },
-    targetAudience: {
-        type: String,
-        enum: ['Children', 'Adults', 'Seniors', 'Everyone']
-    },
-    equipment: {
-        type: [String]
-    },
-    duration: {
-        type: Number,
-        min: 0
-    },
     events: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Events'
     },
-    user:{
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Users'
-    }
 });
 
 const Activity = mongoose.model('Activity', activitySchema);
