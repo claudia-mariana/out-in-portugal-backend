@@ -10,7 +10,7 @@ const activitySchema = new Schema({
     description: {
         type: String
     },
-    environment: {
+    category: {
         type: String,
         enum: ['Aquatic', 'Mountain', 'Forest', 'Beach', 'Urban', 'Other']
     },
@@ -20,8 +20,12 @@ const activitySchema = new Schema({
     },
     events: {
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Events'
+        ref: 'Event'
     },
+    imageUrl: {
+        type: String,
+        required: true,
+    }
 });
 
 const Activity = mongoose.model('Activity', activitySchema);

@@ -20,6 +20,10 @@ const eventSchema = new Schema({
     organization: {
         type: String,
     },
+    meetingPoint: {
+      type: String,
+      required: true,
+    },
     targetAudience: {
       type: String,
       enum: ['Children', 'Adults', 'Seniors', 'Everyone']

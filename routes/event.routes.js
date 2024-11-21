@@ -26,7 +26,6 @@ router.get("/events", (req, res, next) => {
       })
       .catch((error) => {
         next(error);
-        res.status(500).json({ error: "Failed to get list of events" });
       });
   });
   
