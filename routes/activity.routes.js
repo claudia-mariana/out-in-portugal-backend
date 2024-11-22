@@ -46,6 +46,24 @@ router.get("/activities/:id", (req, res, next) => {
 });
 
 
+// GET /api/activities/category/:category - Retrieves activities by category
+router.get("/activities/category/:category", (req, res, next) => {
+    const { category } = req.params;
+
+    Activity.find({ category: category }) // Filters activities by category
+        .then(activities => {
+            if (activities.length > 0) {
+                res.status(200).json(activities);
+            } else {
+                res.status(404).json({ message: `No activities found in the category: ${category}` });
+            }
+        })
+        .catch(error => {
+            next(error);
+        });
+});
+
+
 // PUT /api/activities/:activityId - Updates a specific activity by id
 // router.put("/activities/:id", isAuthenticated, (req, res, next) => {
 //     Activity.findByIdAndUpdate(req.params.id, req.body, { new: true })
