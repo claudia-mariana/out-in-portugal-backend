@@ -6,9 +6,9 @@ const { isAuthenticated } = require('../middleware/jwt.middleware');
 
 // ACTIVITY ROUTES
 // POST /activities - Creates a new activity
-router.post("/activities", isAuthenticated, (req, res, next) => {
+router.post("/activities",  (req, res, next) => {
     const newActivity = req.body;
-
+    console.log(req.body)
     Activity.create(newActivity)
         .then((activityFromDB) => {
             res.status(201).json(activityFromDB);

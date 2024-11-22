@@ -17,10 +17,11 @@ const activitySchema = new Schema({
         type: String,
         required: true,
     },
-    events: {
+    events: [{
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Event'
-    },
+        ref: 'Event',
+        default: []
+    }],
     imageUrl: {
         type: String,
         required: true,
