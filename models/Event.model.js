@@ -17,6 +17,9 @@ const eventSchema = new Schema({
         required: true,
       },
     endDate: Date,
+    description: {
+      type: String,
+    },
     organization: {
         type: String,
     },
