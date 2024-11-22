@@ -32,13 +32,12 @@ const eventSchema = new Schema({
       enum: ['Children', 'Adults', 'Seniors', 'Everyone']
     },
     duration: {
-      type: Number,
-      min: 0
+      type: String,
     },
     equipment: {
       type: String,
     },
-    price: Number,
+    price: String,
   });
   
   const Event = mongoose.model("Event", eventSchema);
