@@ -45,21 +45,19 @@ router.get("/activities/:id", (req, res, next) => {
         });
 });
 
-
-// GET /api/activities/category/:category - Retrieves activities by category
+// GET /api/category/:category - Retrieves activity by category
 router.get("/activities/category/:category", (req, res, next) => {
+    
     const { category } = req.params;
 
-    Activity.find({ category: category }) // Filters activities by category
+    
+    Activity.find({ category })
+        .populate('events')  
         .then(activities => {
-            if (activities.length > 0) {
-                res.status(200).json(activities);
-            } else {
-                res.status(404).json({ message: `No activities found in the category: ${category}` });
-            }
+            res.status(200).json(activities);  
         })
         .catch(error => {
-            next(error);
+            next(error); 
         });
 });
 
