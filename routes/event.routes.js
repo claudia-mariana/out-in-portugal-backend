@@ -40,7 +40,7 @@ router.get("/events", (req, res, next) => {
     }
 
     Event.findById(eventId)
-    //   .populate("??")
+      .populate("activity")
       .then((eventsFromDB) => {
         res.status(200).json(eventsFromDB);
       })
