@@ -38,6 +38,11 @@ const eventSchema = new Schema({
       type: String,
     },
     price: String,
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true
+    }
   });
   
   const Event = mongoose.model("Event", eventSchema);

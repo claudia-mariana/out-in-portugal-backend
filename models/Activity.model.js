@@ -25,6 +25,10 @@ const activitySchema = new Schema({
     imageUrl: {
         type: String,
         required: true,
+    },
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "ActivityCreator"
     }
 });
 const Activity = mongoose.model('Activity', activitySchema);

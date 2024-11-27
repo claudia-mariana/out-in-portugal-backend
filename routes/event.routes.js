@@ -2,11 +2,12 @@ const mongoose = require('mongoose');
 const router = require('express').Router();
 const Event = require("../models/Event.model");
 const { isAuthenticated } = require("../middleware/jwt.middleware");
+const { isOwner } = require("../middleware/isOwner.middleware")
 
 
 // EVENT ROUTES
 // POST /events - Creates a new event
-router.post("/events", (req, res, next) => {
+router.post("/events", isAuthenticated, (req, res, next) => {
     const newEvent = req.body;
   
     Event.create(newEvent)
@@ -50,29 +51,8 @@ router.get("/events", (req, res, next) => {
       });
   });
   
-
-  // GET /api/events/activities/:activityId - Retrieves all of the events for a given activity
-  // router.get("/events/activities/:activityId", (req, res, next) => {
-  //   const { activityId } = req.params;
-
-  //   if (!mongoose.Types.ObjectId.isValid(activityId)) {
-  //       res.status(400).json({ message: "Specified ID is not valid" });
-  //       return;
-  //   }
-
-  //   Event.find({ activity: activityId })
-  //   //   .populate("")
-  //     .then((eventsFromDB) => {
-  //       res.status(200).json(eventsFromDB);
-  //     })
-  //     .catch((error) => {
-  //       next(error);
-  //       console.log(error);
-  //     });
-  // });
-  
   // PUT /events/:eventId - Updates a specific event by id
-  router.put("/events/:eventId", isAuthenticated, (req, res, next) => {
+  router.put("/events/:eventId", isAuthenticated, isOwner, (req, res, next) => {
     const { eventId } = req.params;
     const newDetails = req.body;
 
@@ -92,7 +72,7 @@ router.get("/events", (req, res, next) => {
   });
   
   // DELETE /api/events/:eventId - Deletes a specific event by id
-  router.delete("/events/:eventId", isAuthenticated, (req, res, next) => {
+  router.delete("/events/:eventId", isAuthenticated, isOwner, (req, res, next) => {
     const { eventId } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(eventId)) {
