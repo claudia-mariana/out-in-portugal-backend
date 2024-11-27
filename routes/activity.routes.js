@@ -8,14 +8,12 @@ const { isAuthenticated } = require('../middleware/jwt.middleware');
 // POST /activities - Creates a new activity
 router.post("/activities",  (req, res, next) => {
     const newActivity = req.body;
-    console.log(req.body)
     Activity.create(newActivity)
         .then((activityFromDB) => {
             res.status(201).json(activityFromDB);
         })
         .catch((error) => {
             next(error);
-            res.status(500).json({ error: "Failed to create a new activity" });
         });
 });
 
@@ -28,7 +26,6 @@ router.get("/activities", (req, res, next) => {
         })
         .catch((error) => {
             next(error);
-            res.status(500).json({ error: "Failed to get list of activities" });
         });
 });
 
