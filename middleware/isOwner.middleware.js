@@ -15,12 +15,10 @@ const isOwner = (req, res, next) => {
         return res.status(404).json({ message: "Event not found" });
       }
 
-      // Compare the IDs to check ownership
       if (event.createdBy.toString() !== userId.toString()) {
         return res.status(403).json({ message: "Unauthorized access" });
       }
 
-      // If the check passes, allow the request to proceed
       next();
     })
     .catch(error => {

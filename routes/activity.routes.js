@@ -14,7 +14,10 @@ router.post("/activities", isAuthenticated, (req, res, next) => {
         })
         .catch((error) => {
             console.log(`Error occurred while creating a new activity: ${error.message}`);
-            res.status(400).json({ message: "Error creating a new activity. Please log in." });
+            res.status(400).json({ 
+                message: "Failed to create a new activity. Please ensure you are logged in and all required fields are provided.", 
+                error: error.message 
+            });
         });
 });
 
@@ -26,8 +29,10 @@ router.get("/activities", (req, res, next) => {
             res.status(200).json(activitiesFromDB);
         })
         .catch((error) => {
-            console.log(`Error occurred: ${error.message}`);
-            next(error);
+            console.log(`Failed to retrieve activities: ${error.message}`);
+            res.status(500).json({ 
+                message: "Unable to retrieve activities. Please try again.", 
+                error: error.message });
         });
 });
 
@@ -40,8 +45,11 @@ router.get("/activities/:id", (req, res, next) => {
             res.status(200).json(activity);
         })
         .catch(error => {
-            console.log(`Error occurred: ${error.message}`);
-            next(error)
+            console.log(`Failed to retrieve the activity with ID ${req.params.id}: ${error.message}`);
+            res.status(404).json({ 
+                message: `Activity with ID ${req.params.id} not found.`, 
+                error: error.message 
+            });
         });
 });
 
@@ -57,8 +65,11 @@ router.get("/activities/category/:category", (req, res, next) => {
             res.status(200).json(activities);  
         })
         .catch(error => {
-            console.log(`Error occurred: ${error.message}`);
-            next(error); 
+            console.log(`Failed to retrieve activities for category ${category}: ${error.message}`);
+            res.status(404).json({ 
+                message: `No activities found for category ${category}.`, 
+                error: error.message 
+            });
         });
 });
 
@@ -70,7 +81,7 @@ router.get("/activities/category/:category", (req, res, next) => {
 //             res.status(200).json(updatedActivity);
 //         })
 //         .catch(error => {
-//             next(error)
+//            
 //         });
 // });
 
@@ -82,7 +93,7 @@ router.get("/activities/category/:category", (req, res, next) => {
 //             res.status(204).send();
 //         })
 //         .catch(error => {
-//             next(error)
+    
 //         });
 // });
 
