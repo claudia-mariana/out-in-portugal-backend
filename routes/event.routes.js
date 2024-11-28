@@ -72,7 +72,7 @@ router.get("/events", (req, res, next) => {
       })
       .catch((error) => {
         console.log(`Error occurred: ${error.message}`);
-        next(error);
+        res.status(400).json({ message: "You're not owner of this event, you can't edit it" });
       });
   });
   
