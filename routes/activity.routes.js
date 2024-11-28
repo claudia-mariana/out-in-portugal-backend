@@ -6,14 +6,15 @@ const { isAuthenticated } = require('../middleware/jwt.middleware');
 
 // ACTIVITY ROUTES
 // POST /activities - Creates a new activity
-router.post("/activities",  (req, res, next) => {
+router.post("/activities", isAuthenticated, (req, res, next) => {
     const newActivity = req.body;
     Activity.create(newActivity)
         .then((activityFromDB) => {
             res.status(201).json(activityFromDB);
         })
         .catch((error) => {
-            next(error);
+            console.log(`Error occurred while creating a new activity: ${error.message}`);
+            res.status(400).json({ message: "Error creating a new activity. Please log in." });
         });
 });
 
@@ -25,6 +26,7 @@ router.get("/activities", (req, res, next) => {
             res.status(200).json(activitiesFromDB);
         })
         .catch((error) => {
+            console.log(`Error occurred: ${error.message}`);
             next(error);
         });
 });
@@ -38,6 +40,7 @@ router.get("/activities/:id", (req, res, next) => {
             res.status(200).json(activity);
         })
         .catch(error => {
+            console.log(`Error occurred: ${error.message}`);
             next(error)
         });
 });
@@ -54,6 +57,7 @@ router.get("/activities/category/:category", (req, res, next) => {
             res.status(200).json(activities);  
         })
         .catch(error => {
+            console.log(`Error occurred: ${error.message}`);
             next(error); 
         });
 });

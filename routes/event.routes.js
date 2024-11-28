@@ -8,13 +8,17 @@ const { isOwner } = require("../middleware/isOwner.middleware")
 // EVENT ROUTES
 // POST /events - Creates a new event
 router.post("/events", isAuthenticated, (req, res, next) => {
-    const newEvent = req.body;
+    const newEvent = {
+      ...req.body,
+      createdBy: req.payload._id
+    };
   
     Event.create(newEvent)
       .then((eventFromDB) => {
         res.status(201).json(eventFromDB);
       })
       .catch((error) => {
+        console.log(`Error occurred: ${error.message}`);
         next(error);
       });
   });
@@ -26,6 +30,7 @@ router.get("/events", (req, res, next) => {
         res.status(200).json(eventsFromDB);
       })
       .catch((error) => {
+        console.log(`Error occurred: ${error.message}`);
         next(error);
       });
   });
@@ -46,8 +51,8 @@ router.get("/events", (req, res, next) => {
         res.status(200).json(eventsFromDB);
       })
       .catch((error) => {
+        console.log(`Error occurred: ${error.message}`);
         next(error);
-        console.log(error);
       });
   });
   
@@ -66,8 +71,8 @@ router.get("/events", (req, res, next) => {
         res.status(200).json(eventsFromDB);
       })
       .catch((error) => {
+        console.log(`Error occurred: ${error.message}`);
         next(error);
-        console.error(error);
       });
   });
   
@@ -85,9 +90,8 @@ router.get("/events", (req, res, next) => {
         res.status(204).send();
       })
       .catch((error) => {
+        console.log(`Error occurred: ${error.message}`);
         next(error);
-        console.error("Error deleting event...");
-        console.error(error);
       });
   });
   module.exports = router;

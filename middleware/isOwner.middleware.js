@@ -3,7 +3,7 @@ const Event = require("../models/Event.model");
 
 const isOwner = (req, res, next) => {
   const { eventId } = req.params;
-  const userId = req.payload._id; // Accessing user ID set by isAuthenticated middleware
+  const userId = req.payload._id;
 
   if (!mongoose.Types.ObjectId.isValid(eventId)) {
     return res.status(400).json({ message: "Invalid event ID" });
