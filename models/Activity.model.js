@@ -13,10 +13,10 @@ const activitySchema = new Schema({
         type: String,
         enum: ['Aquatic', 'Mountain', 'Forest', 'Beach', 'Urban', 'Other']
     },
-    location:{
-        type: String,
-        required: true,
-    },
+    // location:{
+    //     type: String,
+    //     required: true,
+    // },
     events: [{
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Event',
